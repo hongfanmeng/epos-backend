@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "singularName": "order",
+    "pluralName": "orders",
+    "displayName": "Order",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "remark": {
+      "type": "text"
+    },
+    "items": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::order-item.order-item",
+      "inversedBy": "order"
+    },
+    "subTotal": {
+      "type": "float"
+    },
+    "discount": {
+      "type": "float"
+    },
+    "extraFee": {
+      "type": "float"
+    },
+    "total": {
+      "type": "float"
+    }
+  }
+}
