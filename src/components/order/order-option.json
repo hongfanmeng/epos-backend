@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_order_order_options",
+  "info": {
+    "displayName": "Order Option",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "groupTitle": {
+      "type": "string"
+    }
+  }
+}

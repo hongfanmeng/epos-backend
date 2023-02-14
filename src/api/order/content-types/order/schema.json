@@ -15,12 +15,6 @@
     "remark": {
       "type": "text"
     },
-    "items": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::order-item.order-item",
-      "inversedBy": "order"
-    },
     "subTotal": {
       "type": "float"
     },
@@ -32,6 +26,11 @@
     },
     "total": {
       "type": "float"
+    },
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "order.order-item"
     }
   }
 }

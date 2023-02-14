@@ -15,7 +15,8 @@
     "@strapi/plugin-users-permissions": "4.6.1",
     "@strapi/strapi": "4.6.1",
     "better-sqlite3": "8.0.1",
-    "strapi-plugin-slugify": "^2.3.2"
+    "strapi-plugin-slugify": "^2.3.2",
+    "zod": "^3.20.6"
   },
   "author": {
     "name": "A Strapi developer"

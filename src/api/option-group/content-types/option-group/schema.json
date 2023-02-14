@@ -32,10 +32,9 @@
       "type": "integer"
     },
     "options": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::product-option.product-option",
-      "mappedBy": "group"
+      "type": "component",
+      "repeatable": true,
+      "component": "product.product-option"
     }
   }
 }

@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_order_order_items",
+  "info": {
+    "displayName": "Order Item"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "quantity": {
+      "type": "integer"
+    },
+    "amount": {
+      "type": "float"
+    },
+    "options": {
+      "type": "component",
+      "repeatable": true,
+      "component": "order.order-option"
+    }
+  }
+}
