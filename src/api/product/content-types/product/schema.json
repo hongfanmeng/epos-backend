@@ -42,11 +42,6 @@
         "audios"
       ]
     },
-    "isActive": {
-      "type": "boolean",
-      "required": true,
-      "default": false
-    },
     "category": {
       "type": "relation",
       "relation": "manyToOne",

@@ -1,15 +1,13 @@
 {
   "collectionName": "components_product_product_options",
   "info": {
-    "displayName": "Product Option"
+    "displayName": "Product Option",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "title": {
       "type": "string"
-    },
-    "active": {
-      "type": "boolean"
     },
     "price": {
       "type": "float"

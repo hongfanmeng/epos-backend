@@ -16,11 +16,30 @@ const OrderCreate = z.object({
   ),
 });
 
+type Product = {
+  id: number;
+  title: string;
+  price: number;
+  optionGroups: {
+    id: number;
+    title: string;
+    minCount: number;
+    maxCount: number;
+    options: {
+      id: number;
+      title: string;
+      price: number;
+    }[];
+  }[];
+};
+type OrderOption = { title: string; groupTitle: string };
+
 export default factories.createCoreController(
   "api::order.order",
   ({ strapi }) => ({
     async create(ctx) {
-      const result = OrderCreate.safeParse(ctx.request.body.data);
+      const body = ctx.request.body as { data?: z.infer<typeof OrderCreate> };
+      const result = OrderCreate.safeParse(body?.data);
 
       if (!result.success) {
         const { error } = result as SafeParseError<any>;
@@ -31,22 +50,57 @@ export default factories.createCoreController(
 
       const productIds = data.items.map((item) => item.product);
 
-      const products = await strapi.entityService.findMany(
+      const products = (await strapi.entityService.findMany(
         "api::product.product",
         {
           fields: ["id", "title", "price"],
           filters: { id: { $in: productIds } },
           populate: ["optionGroups.options"],
+          publicationState: "live",
         }
-      );
+      )) as Product[];
+
+      if (products.length != new Set(productIds).size) {
+        return ctx.badRequest("invalid product");
+      }
 
       const items = data.items.map((item) => {
-        const { quantity, product: productId } = item;
+        const { quantity, product: productId, options: optionIds } = item;
         const product = products.find((p) => p.id == productId);
+        const optionGroups = product.optionGroups;
+        let price = product.price;
+        let options = [] as OrderOption[];
+        optionGroups.forEach((group) => {
+          // filter options that in group
+          const optionsOfGroup = group.options.filter((option) =>
+            optionIds.includes(option.id)
+          );
+          // check option within range
+          if (
+            group.minCount > optionsOfGroup.length ||
+            (group.maxCount && group.maxCount < optionsOfGroup.length)
+          ) {
+            return ctx.badRequest("invalid options count");
+          }
+          // calc option price
+          price += optionsOfGroup.reduce(
+            (sum, option) => sum + (option.price ?? 0),
+            0
+          );
+          // add options to item
+          options.push(
+            ...optionsOfGroup.map((option) => ({
+              title: option.title,
+              groupTitle: group.title,
+            }))
+          );
+        });
+
         return {
           title: product.title,
-          amount: product.price * quantity,
+          amount: price * quantity,
           quantity,
+          options,
           publishedAt: new Date(),
         };
       });

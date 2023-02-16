@@ -16,11 +16,6 @@
       "type": "string",
       "required": true
     },
-    "active": {
-      "type": "boolean",
-      "default": false,
-      "required": true
-    },
     "products": {
       "type": "relation",
       "relation": "oneToMany",
