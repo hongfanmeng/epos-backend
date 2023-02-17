@@ -34,7 +34,7 @@
     "options": {
       "type": "component",
       "repeatable": true,
-      "component": "product.product-option"
+      "component": "product.option"
     }
   }
 }

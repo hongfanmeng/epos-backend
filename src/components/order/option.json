@@ -1,8 +1,7 @@
 {
-  "collectionName": "components_order_order_options",
+  "collectionName": "components_order_options",
   "info": {
-    "displayName": "Order Option",
-    "description": ""
+    "displayName": "option"
   },
   "options": {},
   "attributes": {

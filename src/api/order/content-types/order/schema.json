@@ -30,7 +30,7 @@
     "items": {
       "type": "component",
       "repeatable": true,
-      "component": "order.order-item"
+      "component": "order.item"
     }
   }
 }
