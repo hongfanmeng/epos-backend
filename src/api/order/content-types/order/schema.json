@@ -19,10 +19,14 @@
       "type": "float"
     },
     "discount": {
-      "type": "float"
+      "type": "float",
+      "default": 0,
+      "required": true
     },
     "extraFee": {
-      "type": "float"
+      "type": "float",
+      "default": 0,
+      "required": true
     },
     "total": {
       "type": "float"
